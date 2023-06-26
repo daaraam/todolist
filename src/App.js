@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
+import Done from "./components/Done";
+import Working from "./components/Working";
+import InputContainer from "./components/InputContainer";
 
 function App() {
   const [box, setBox] = useState([
@@ -34,7 +37,6 @@ function App() {
     const completedTodo = box.filter((item) => item.id === id)[0];
     completedTodo.done = !completedTodo.done;
     setBox([...box]);
-    console.log(box);
   };
 
   const deleteBtnHandler = (id) => {
@@ -49,89 +51,27 @@ function App() {
         <p>React</p>
       </div>
 
-      <form className="input-container">
-        <div className="input-line">
-          <label className="input-label">제목</label>
-          <input
-            onChange={inputTitleChangeHandler}
-            value={title}
-            className="input"
-          />
-          <label className="input-label">내용</label>
-          <input
-            onChange={inputDetailChangeHandler}
-            value={detail}
-            className="input"
-          />{" "}
-        </div>
-        <button onClick={addBtnHandler} className="add-btn">
-          추가하기
-        </button>
-      </form>
+      <InputContainer
+        inputTitleChangeHandler={inputTitleChangeHandler}
+        title={title}
+        inputDetailChangeHandler={inputDetailChangeHandler}
+        detail={detail}
+        addBtnHandler={addBtnHandler}
+      />
+
       <h2 className="working">Working..💻</h2>
-      <div className="todo-wrap">
-        {box.map((item) =>
-          item.done ? (
-            <div></div>
-          ) : (
-            <div className="todo-list" key={item.id}>
-              <div className="todo-container">
-                <h2 className="todo-title">{item.title}</h2>
-                <div className="todo-text">{item.detail}</div>
+      <Working
+        box={box}
+        deleteBtnHandler={deleteBtnHandler}
+        completeBtnHandler={completeBtnHandler}
+      />
 
-                <div className="button-group">
-                  <button
-                    onClick={() => deleteBtnHandler(item.id)}
-                    className="delete-btn"
-                  >
-                    삭제하기
-                  </button>
-                  <button
-                    onClick={() => completeBtnHandler(item.id)}
-                    className="complete-btn"
-                  >
-                    {item.done ? "취소" : "완료"}
-                  </button>
-                </div>
-              </div>
-            </div>
-          )
-        )}
-      </div>
-
-      {/* item.done가 true인 애들만 띄우자 */}
-      <div className="todo-list">
-        <h2>Done..!😎</h2>
-        <div className="todo-wrap">
-          {box.map((item) =>
-            item.done ? (
-              <div className="todo-list" key={item.id}>
-                <div className="todo-container">
-                  <h2 className="todo-title">{item.title}</h2>
-                  <div className="todo-text">{item.detail}</div>
-
-                  <div className="button-group">
-                    <button
-                      onClick={() => deleteBtnHandler(item.id)}
-                      className="delete-btn"
-                    >
-                      삭제하기
-                    </button>
-                    <button
-                      onClick={() => completeBtnHandler(item.id)}
-                      className="complete-btn"
-                    >
-                      {item.done ? "취소" : "완료"}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div></div>
-            )
-          )}
-        </div>
-      </div>
+      <h2 className="done">Done!!!😎</h2>
+      <Done
+        box={box}
+        deleteBtnHandler={deleteBtnHandler}
+        completeBtnHandler={completeBtnHandler}
+      />
     </div>
   );
 }
