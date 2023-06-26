@@ -1,12 +1,19 @@
-import InputTitle from "./InputTitle"
-import InputDetail from "./InputDetail"
-
-const InputContainer =({addBtnHandler})=>{
+const InputContainer =({addBtnHandler,inputTitleChangeHandler,title,inputDetailChangeHandler,detail})=>{
 return(
 <form className="input-container">
 <div className="input-line">
-  <InputTitle/>
-  <InputDetail/>
+<label className="input-label">제목</label>
+        <input
+        onChange={inputTitleChangeHandler}
+        value={title}
+        className="input"
+        />
+<label className="input-label">내용</label>
+        <input
+        onChange={inputDetailChangeHandler}
+        value={detail}
+        className="input"
+        />
 </div>
 <button onClick={addBtnHandler} className="add-btn">
   추가하기
