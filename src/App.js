@@ -3,7 +3,7 @@ import "./App.css";
 
 function App() {
   const [box, setBox] = useState([
-    { id: 1, title: "React 공부", detail: "todoList 만들기" },
+    { id: 1, title: "React 공부", detail: "todoList 만들기", done: false },
   ]);
 
   const [title, setTitle] = useState("");
@@ -18,17 +18,28 @@ function App() {
   };
 
   const addBtnHandler = (event) => {
-    alert("추가!");
     event.preventDefault();
     const newBox = {
       id: box.length + 1,
       title: title,
       detail: detail,
+      done: false,
     };
-
     setTitle("");
     setDetail("");
     setBox([...box, newBox]);
+  };
+
+  const completeBtnHandler = (id) => {
+    const completedTodo = box.filter((item) => item.id === id)[0];
+    completedTodo.done = !completedTodo.done;
+    setBox([...box]);
+    console.log(box);
+  };
+
+  const deleteBtnHandler = (id) => {
+    const deletedBox = box.filter((item) => item.id !== id);
+    setBox(deletedBox);
   };
 
   return (
@@ -59,23 +70,67 @@ function App() {
       </form>
       <h2 className="working">Working..💻</h2>
       <div className="todo-wrap">
-        {box.map((item) => (
-          <div className="todo-list" key={item.id}>
-            <div className="todo-container">
-              <h2 className="todo-title">{item.title}</h2>
-              <div className="todo-text">{item.detail}</div>
+        {box.map((item) =>
+          item.done ? (
+            <div></div>
+          ) : (
+            <div className="todo-list" key={item.id}>
+              <div className="todo-container">
+                <h2 className="todo-title">{item.title}</h2>
+                <div className="todo-text">{item.detail}</div>
 
-              <div className="button-group">
-                <button className="delete-btn">삭제하기</button>
-                <button className="complete-btn">완료</button>
+                <div className="button-group">
+                  <button
+                    onClick={() => deleteBtnHandler(item.id)}
+                    className="delete-btn"
+                  >
+                    삭제하기
+                  </button>
+                  <button
+                    onClick={() => completeBtnHandler(item.id)}
+                    className="complete-btn"
+                  >
+                    {item.done ? "취소" : "완료"}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          )
+        )}
       </div>
 
+      {/* item.done가 true인 애들만 띄우자 */}
       <div className="todo-list">
         <h2>Done..!😎</h2>
+        <div className="todo-wrap">
+          {box.map((item) =>
+            item.done ? (
+              <div className="todo-list" key={item.id}>
+                <div className="todo-container">
+                  <h2 className="todo-title">{item.title}</h2>
+                  <div className="todo-text">{item.detail}</div>
+
+                  <div className="button-group">
+                    <button
+                      onClick={() => deleteBtnHandler(item.id)}
+                      className="delete-btn"
+                    >
+                      삭제하기
+                    </button>
+                    <button
+                      onClick={() => completeBtnHandler(item.id)}
+                      className="complete-btn"
+                    >
+                      {item.done ? "취소" : "완료"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div></div>
+            )
+          )}
+        </div>
       </div>
     </div>
   );

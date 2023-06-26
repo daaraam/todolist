@@ -63,6 +63,12 @@
   gap: 12px;
 }
 
+.done-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .todo-container {
   border: 4px solid teal;
   border-radius: 12px;
@@ -87,6 +93,15 @@
 
 
 .complete-btn {
+  border: 2px solid green;
+  border-radius: 12px;
+  width: 130px;
+  height: 40px;
+  padding: 1px 6px;
+  background-color: #ffffff;
+}
+
+.cancel-btn {
   border: 2px solid green;
   border-radius: 12px;
   width: 130px;
