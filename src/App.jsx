@@ -36,7 +36,8 @@ function App() {
   const completeBtnHandler = (id) => {  
     const completedTodo = box.find((item) => item.id === id);
     completedTodo.done = !completedTodo.done;
-    setBox([...box]);
+    const newBox = [...box];
+    setBox(newBox)
   };
 
   const deleteBtnHandler = (id) => {
