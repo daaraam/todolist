@@ -2,9 +2,7 @@
     return(
     <div className="todo-wrap">
         {box.map((item) =>
-          item.done ? (
-            <div key={item}></div>
-          ) : (
+          item.done ? <div key={item}></div> : 
             <div className="todo-list" key={item.id}>
               <div className="todo-container">
                 <h2 className="todo-title">{item.title}</h2>
@@ -26,7 +24,6 @@
                 </div>
               </div>
             </div>
-          )
         )}
       </div>)
 }

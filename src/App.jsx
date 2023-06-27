@@ -33,8 +33,8 @@ function App() {
     setBox([...box, newBox]);
   };
 
-  const completeBtnHandler = (id) => {
-    const completedTodo = box.filter((item) => item.id === id)[0];
+  const completeBtnHandler = (id) => {  
+    const completedTodo = box.find((item) => item.id === id);
     completedTodo.done = !completedTodo.done;
     setBox([...box]);
   };

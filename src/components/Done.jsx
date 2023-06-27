@@ -3,7 +3,7 @@ const Done=({box,deleteBtnHandler,completeBtnHandler})=>{
     return(
 <div className="todo-wrap">
         {box.map((item) =>
-          item.done ? (
+          item.done ? 
             <div className="todo-list" key={item.id}>
               <div className="todo-container">
                 <h2 className="todo-title">{item.title}</h2>
@@ -25,9 +25,8 @@ const Done=({box,deleteBtnHandler,completeBtnHandler})=>{
                 </div>
               </div>
             </div>
-          ) : (
-            <div key={item}></div>
-          )
+          : 
+          <div key={item}></div>
         )}
       </div>
 
