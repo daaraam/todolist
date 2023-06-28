@@ -83,7 +83,7 @@ function App() {
       <div className="todo-wrapper">
         {todo.map((item) =>
           item.done ? (
-            <div></div>
+            <></>
           ) : (
             <div className="todo-list" key={item.id}>
               <h2 className="title-text">{item.title}</h2>
@@ -129,7 +129,7 @@ function App() {
               </div>
             </div>
           ) : (
-            <div></div>
+            <></>
           )
         )}
       </div>
