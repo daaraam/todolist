@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "./App.css";
+import InputContainer from "./Components/InputContainer";
+import TodoWrapper from "./Components/TodoWrapper";
+import DoneTodoWrapper from "./Components/DoneTodoWrapper";
 
 function App() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-
   const [todo, setTodo] = useState([
     { id: 1, title: "ToDoList", content: "다시 만들어보자", done: false },
   ]);
@@ -55,84 +57,27 @@ function App() {
         <div>My Todo List.. 🤍</div>
         <div>React</div>
       </div>
-      <div className="input-form">
-        <div className="input-container">
-          <label className="label-group">제목</label>
-          <input
-            type="text"
-            onChange={titleChangeHandler}
-            value={title}
-            className="input"
-            placeholder="title"
-          />
-          <label className="label-group">내용</label>
-          <input
-            onChange={contentChangeHandler}
-            value={content}
-            type="text"
-            className="input"
-            placeholder="content"
-          />
-          <button onClick={addBtnHandler} className="add-btn">
-            Add
-          </button>
-        </div>
-      </div>
+      <InputContainer
+        title={title}
+        titleChangeHandler={titleChangeHandler}
+        content={content}
+        contentChangeHandler={contentChangeHandler}
+        addBtnHandler={addBtnHandler}
+      />
 
       <h2 className="working">working.. 🤍</h2>
-      <div className="todo-wrapper">
-        {todo.map((item) =>
-          item.done ? (
-            <></>
-          ) : (
-            <div className="todo-list" key={item.id}>
-              <h2 className="title-text">{item.title}</h2>
-              <p className="todo-text">{item.content}</p>
-              <div className="button-container">
-                <button
-                  onClick={() => delBtnHandler(item.id)}
-                  className="del-btn"
-                >
-                  삭 제
-                </button>
-                <button
-                  onClick={() => completeBtnHandler(item.id)}
-                  className="com-btn"
-                >
-                  {item.done ? "취 소" : "완 료"}
-                </button>
-              </div>
-            </div>
-          )
-        )}
-      </div>
+      <TodoWrapper
+        todo={todo}
+        delBtnHandler={delBtnHandler}
+        completeBtnHandler={completeBtnHandler}
+      />
+
       <h2 className="working">Done.. 💜</h2>
-      <div className="todo-wrapper">
-        {todo.map((item) =>
-          item.done ? (
-            <div className="todo-list" key={item.id}>
-              <h2 className="title-text">{item.title}</h2>
-              <p className="todo-text">{item.content}</p>
-              <div className="button-container">
-                <button
-                  onClick={() => delBtnHandler(item.id)}
-                  className="del-btn"
-                >
-                  삭 제
-                </button>
-                <button
-                  onClick={() => completeBtnHandler(item.id)}
-                  className="com-btn"
-                >
-                  {item.done ? "취 소" : "완 료"}
-                </button>
-              </div>
-            </div>
-          ) : (
-            <></>
-          )
-        )}
-      </div>
+      <DoneTodoWrapper
+        todo={todo}
+        delBtnHandler={delBtnHandler}
+        completeBtnHandler={completeBtnHandler}
+      />
     </div>
   );
 }
