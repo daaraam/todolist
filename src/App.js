@@ -3,6 +3,26 @@ import "./App.css";
 import InputContainer from "./Components/InputContainer";
 import TodoWrapper from "./Components/TodoWrapper";
 import DoneTodoWrapper from "./Components/DoneTodoWrapper";
+import { styled } from "styled-components";
+
+const StMainContainer = styled.div`
+  width: 1200px;
+  height: 800px;
+  margin: 0 auto;
+`;
+
+const StTitleContainer = styled.div`
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-style: dashed;
+  background-color: lavenderblush;
+  color: palevioletred;
+  padding: 0 20px;
+  font-size: 20px;
+  font-weight: 800;
+`;
 
 function App() {
   const [title, setTitle] = useState("");
@@ -52,11 +72,11 @@ function App() {
   };
 
   return (
-    <div className="main-container">
-      <div className="title-container">
+    <StMainContainer>
+      <StTitleContainer>
         <div>My Todo List.. 🤍</div>
         <div>React</div>
-      </div>
+      </StTitleContainer>
       <InputContainer
         title={title}
         titleChangeHandler={titleChangeHandler}
@@ -78,7 +98,7 @@ function App() {
         delBtnHandler={delBtnHandler}
         completeBtnHandler={completeBtnHandler}
       />
-    </div>
+    </StMainContainer>
   );
 }
 
