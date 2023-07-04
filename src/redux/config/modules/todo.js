@@ -1,17 +1,70 @@
-// Reducer : redux에서 변화를 일으키는 함수 역할
+export const ADD_TODO = 'ADD_TODO';
+export const DELETE_TODO = 'DELETE_TODO';
+export const TOGGLE_TODO = 'TOGGLE_TODO';
 
-const initialState = {
-    id: 1,
-    title: 'ToDoList',
-    content: 'LV.2를 통과해보자',
-    done: false,
+export const addTodo = payload => ({
+	type: ADD_TODO,
+	payload,
+});
+
+export const deleteTodo = payload => ({
+	type: DELETE_TODO,
+	payload,
+});
+
+export const toggleTodo = payload => ({
+	type: TOGGLE_TODO,
+	payload,
+});
+
+const initialState = [
+	{
+		id: 1,
+		title: '제목을 입력해보세요.',
+		content: '내용을 입력해보세요.',
+		done: false,
+	},
+];
+``;
+
+const todoReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case DELETE_TODO:
+			const id = action.payload;
+			return state.filter(item => item.id !== id);
+		// return state;
+
+		case TOGGLE_TODO:
+			const todo = action.payload;
+			return state.map(item => (item.id === todo ? { ...item, done: !item.done } : item));
+		// return state;
+
+		case ADD_TODO:
+			const newTodo = action.payload; // {id: 1688487088346, title: "aa", content: "aa", done: false} // {newTodo:.. 찾는데, 없으니까 undefined}
+			return [...state, newTodo];
+		// return state;
+
+		default:
+			return state;
+	}
 };
 
-const todo = (state = initialState, action) => {
-    switch (action.type) {
-        default:
-            return state;
-    }
-};
+export default todoReducer;
 
-export default todo;
+// const inputReducer = (state, action) => {
+// 	switch (action.type) {
+// 		case 'TITLE_CHANGE_HANDLER':
+// 			const { titleValue, title } = action.payload;
+// 			return { ...state, [title]: titleValue };
+
+// 		case 'CONTENT_CHANGE_HANDLER':
+// 			const { contentValue, content } = action.payload;
+// 			return { ...state, [content]: contentValue };
+
+// 		case 'ADD_BTN_HANDLER':
+// 			return { ...state };
+
+// 		default:
+// 			return state;
+// 	}
+// };

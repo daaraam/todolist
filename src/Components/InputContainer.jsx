@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { styled } from 'styled-components';
+import { addTodo } from '../redux/config/modules/todo';
+// 멍 진 짱 ~!
 
-// const todoReducer = (state, action) => {
-// 	switch (action.type) {
-// 		default :
-//         return state
-//     }
-
-function InputContainer({ todo, setTodo }) {
+function InputContainer() {
 	const [title, setTitle] = useState('');
 	const [content, setContent] = useState('');
+	const dispatch = useDispatch();
 
 	const titleChangeHandler = event => {
 		setTitle(event.target.value);
@@ -24,19 +22,20 @@ function InputContainer({ todo, setTodo }) {
 		if (title.length === 0 || content.length === 0) {
 			return;
 		}
-
 		if (title.length >= 20 || content.length >= 40) {
 			return;
 		}
 		const newTodo = {
-			id: 1,
+			id: Date.now(),
 			title,
 			content,
 			done: false,
 		};
-		setTodo([...todo, newTodo]);
+
+		dispatch(addTodo(newTodo));
 		setTitle('');
 		setContent('');
+		// console.log(newTodo);
 	};
 
 	return (
@@ -97,3 +96,48 @@ const StAddBtn = styled.button`
 `;
 
 export default InputContainer;
+
+// const [todo, dispatch] = useReducer(inputReducer, {
+// 	title: '',
+// 	content: '',
+// });
+
+// const titleChangeHandler = event => {
+// 	const { value } = event.target;
+// 	dispatch({
+// 		type: 'TITLE_CHANGE_HANDLER',
+// 		payload: { titleValue: value, title: 'title' },
+// 	});
+// };
+
+// const contentChangeHandler = event => {
+// 	const { value } = event.target;
+// 	dispatch({
+// 		type: 'CONTENT_CHANGE_HANDLER',
+// 		payload: { contentValue: value, content: 'content' },
+// 	});
+// };
+
+// const addBtnHandler = event => {
+// 	event.preventDefault();
+
+// 	if (todo.title.length === 0 || todo.content.length === 0) {
+// 		return;
+// 	}
+
+// 	if (todo.title.length >= 20 || todo.content.length >= 40) {
+// 		return;
+// 	}
+
+// 	const newTodo = {
+// 		id: 1,
+// 		title: todo.title,
+// 		content: todo.content,
+// 		done: false,
+// 	};
+
+// 	dispatch({ type: 'ADD_BTN_HANDLER', payload: { newTodo } });
+// 	dispatch(addTodo(newTodo));
+// 	titleInputRef.current.value = '';
+// 	contentInputRef.current.value = '';
+// };

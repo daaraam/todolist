@@ -1,51 +1,40 @@
-import React, { useReducer } from 'react';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-
-const todoReducer = (state, action) => {
-	switch (action.type) {
-		case 'DELETE_BTN_HANDLER':
-			const { id } = action.payload;
-			return state.filter(item => item.id !== id);
-
-		case 'COMPLETE_BTN_HANDLER':
-			const { todo } = action.payload;
-			return state.map(item => (item.id === todo ? { ...item, done: !item.done } : item));
-
-		default:
-			return state;
-	}
-};
+import { deleteTodo, toggleTodo } from '../redux/config/modules/todo';
 
 function TodoWrapper() {
-	const [todo, dispatch] = useReducer(todoReducer, []);
+	const selectorList = useSelector(store => store.todoReducer);
+	// console.log(selectorList);
+	const todoDispatch = useDispatch();
 
 	const delBtnHandler = id => {
-		dispatch({ type: 'DELETE_BTN_HANDLER', payload: { id } });
+		todoDispatch(deleteTodo(id));
 	};
 
 	const completeBtnHandler = id => {
-		dispatch({ type: 'COMPLETE_BTN_HANDLER', payload: { todo } });
+		todoDispatch(toggleTodo(id));
 	};
+	// console.log(selectorList);
 
 	return (
 		<StTodoWrapper>
-			{todo.map(item =>
-				item.done ? (
-					<React.Fragment key={item.id}></React.Fragment>
-				) : (
-					<StTodoList key={item.id}>
-						<StDetail to={`/detail/${item.id}`}>📜</StDetail>
-						<StTitleText>{item.title}</StTitleText>
-						<StTodoText>{item.content}</StTodoText>
-						<StBtnContainer>
-							<StDelBtn onClick={() => delBtnHandler(item.id)}>삭 제</StDelBtn>
-							<StComBtn onClick={() => completeBtnHandler(item.id)}>
-								{item.done ? '취 소' : '완 료'}
-							</StComBtn>
-						</StBtnContainer>
-					</StTodoList>
-				),
+			{selectorList.map(
+				item =>
+					!item.done && (
+						<StTodoList key={item.id}>
+							<StDetail to={`/detail/${item.id}`}>📜</StDetail>
+							<StTitleText>{item.title}</StTitleText>
+							<StTodoText>{item.content}</StTodoText>
+							<StBtnContainer>
+								<StDelBtn onClick={() => delBtnHandler(item.id)}>삭 제</StDelBtn>
+								<StComBtn onClick={() => completeBtnHandler(item.id)}>
+									{item.done ? '취 소' : '완 료'}
+								</StComBtn>
+							</StBtnContainer>
+						</StTodoList>
+					),
 			)}
 		</StTodoWrapper>
 	);
