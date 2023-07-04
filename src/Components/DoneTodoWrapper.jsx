@@ -71,7 +71,19 @@ const StComBtn = styled.button`
   }
 `;
 
-function DoneTodoWrapper({ todo, delBtnHandler, completeBtnHandler }) {
+function DoneTodoWrapper({ todo, setTodo }) {
+  const delBtnHandler = (id) => {
+    const deletedTodo = todo.filter((item) => item.id !== id);
+    setTodo(deletedTodo);
+  };
+
+  const completeBtnHandler = (id) => {
+    const doneTodo = todo.map((item) =>
+      item.id === id ? { ...item, done: !item.done } : item
+    );
+    setTodo(doneTodo);
+  };
+
   return (
     <StTodoWrapper>
       {todo.map((item) =>
