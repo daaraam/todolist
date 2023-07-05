@@ -43,7 +43,7 @@ function InputContainer() {
 			<StInputContainer>
 				<StLabelGroup>제목</StLabelGroup>
 				<StInput type="text" onChange={titleChangeHandler} value={title} placeholder="title" />
-				<label className="label-group">내용</label>
+				<StLabelGroup>내용</StLabelGroup>
 				<StInput onChange={contentChangeHandler} value={content} type="text" placeholder="content" />
 				<StAddBtn onClick={addBtnHandler}>Add</StAddBtn>
 			</StInputContainer>

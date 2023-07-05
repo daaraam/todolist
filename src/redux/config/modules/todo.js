@@ -19,14 +19,12 @@ export const toggleTodo = payload => ({
 
 const initialState = [
 	{
-		id: 1,
-		title: '제목을 입력해보세요.',
-		content: '내용을 입력해보세요.',
+		id: 100,
+		title: '제목을 입력해보세요!!!',
+		content: '내용을 입력해보세요',
 		done: false,
 	},
 ];
-``;
-
 const todoReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case DELETE_TODO:
