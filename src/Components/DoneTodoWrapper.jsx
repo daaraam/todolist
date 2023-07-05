@@ -22,7 +22,7 @@ function TodoWrapper() {
 				item =>
 					item.done && (
 						<StTodoList key={item.id}>
-							<StDetail to={`/detail/${item.id}`}>📜</StDetail>
+							<StDetail to={`/detail/${item.id}`}>📝</StDetail>
 							<StTitleText>{item.title}</StTitleText>
 							<StTodoText>{item.content}</StTodoText>
 							<StBtnContainer>
@@ -41,10 +41,11 @@ function TodoWrapper() {
 export default TodoWrapper;
 
 const StDetail = styled(Link)`
-	padding: 3px;
+	padding: 1px;
+	margin: 301px;
 	border: 3px solid lavender;
-	background-color: palevioletred;
-	color: palevioletred;
+	background-color: lightpink;
+	color: lightpink;
 	border-radius: 6px;
 	cursor: pointer;
 `;
