@@ -1,5 +1,4 @@
-![title](https://ifh.cc/g/OQbgvY.png)   
-[ 🎁 vercel ](https://third-todolist.vercel.app/)   
+
 
 ## 📜 TODOLIST ?
 할 일을 추가, 수정, 삭제하고 완료 여부를 표시할 수 있는 웹사이트 입니다.
