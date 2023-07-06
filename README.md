@@ -1,5 +1,4 @@
-![title](https://ifh.cc/g/OQbgvY.png)   
-[ 🎁 vercel ](https://third-todolist.vercel.app/)   
+
 
 ## 📜 TODOLIST ?
 할 일을 추가, 수정, 삭제하고 완료 여부를 표시할 수 있는 웹사이트 입니다.
@@ -16,3 +15,7 @@
 - Todo 완료 버튼 문구, 위치 변경 **`Working ↔ Done)`**
 : 완료 버튼을 누르면 Done 탭으로 할일이 이동되고, 취소 버튼으로 변경됩니다.
 취소 버튼을 누르면 다시 Working 탭으로 이동하고, 완료 버튼으로 변경됩니다.
+
+## 😆 TODOLIST LV.2 구현목록   
+- 리덕스를 사용해서 전역으로 상태를 관리하기
+- 상세보기 클릭하면 Todo의 상세 페이지로 이동하기 
